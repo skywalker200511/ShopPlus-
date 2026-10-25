@@ -85,7 +85,7 @@ export default function ImportPage() {
     Papa.parse<Record<string, string>>(uploadedFile, {
       header: true,
       skipEmptyLines: true,
-      complete: (results) => {
+      complete: (results: Papa.ParseResult<Record<string, string>>) => {
         const fileHeaders = results.meta.fields || [];
         setHeaders(fileHeaders);
         setRawData(results.data);
@@ -100,7 +100,7 @@ export default function ImportPage() {
           tags: "",
         };
 
-        fileHeaders.forEach((h) => {
+        fileHeaders.forEach((h: string) => {
           const lower = h.toLowerCase();
           if (lower.includes("name")) autoMap.name = h;
           else if (lower.includes("email") || lower.includes("mail")) autoMap.email = h;
